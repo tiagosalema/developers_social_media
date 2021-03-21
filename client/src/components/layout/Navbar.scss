@@ -1,0 +1,24 @@
+#header {
+  display: flex;
+  justify-content: space-between;
+  background: #ad2754;
+  margin: auto;
+  padding: 30px 15px;
+
+  .right {
+    a {
+      margin-left: 30px;
+    }
+  }
+
+  a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #dbf5c2;
+    }
+  }
+}

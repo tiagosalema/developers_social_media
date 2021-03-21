@@ -1,0 +1,85 @@
+#profile {
+  margin-top: 30px;
+
+  header {
+    background: #ad2754;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    margin-top: 15px;
+
+    img {
+      border-radius: 50%;
+    }
+    .social-media a {
+      color: white;
+      font-size: 30px;
+      margin: 0 8px;
+    }
+  }
+
+  .about,
+  .skills,
+  .experience {
+    border-radius: 5px;
+    border: 2px solid #ad2754;
+    margin: 5px 0;
+    padding: 30px;
+    padding-bottom: 60px;
+    background: #f5e9e9;
+    text-align: center;
+  }
+
+  .about {
+    p {
+      width: 700px;
+      max-width: 100%;
+      margin: auto;
+      font-weight: lighter;
+      line-height: 1.8;
+    }
+  }
+  .skills {
+    ul {
+      margin-left: 0;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 500px;
+    }
+    li {
+      margin: 0 25px;
+
+      &::before {
+        content: '\f058';
+        font-family: 'Font Awesome 5 Free';
+        color: #ad2754;
+        margin-right: 8px;
+        font-weight: bold;
+      }
+    }
+  }
+  .experience {
+    text-align: left;
+
+    .title {
+      font-weight: bold;
+    }
+
+    li {
+      margin-bottom: 30px;
+    }
+    p {
+      margin: 0;
+      margin-bottom: 5px;
+    }
+  }
+
+  ul {
+    padding-left: 0;
+  }
+  li {
+    list-style: none;
+  }
+}

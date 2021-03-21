@@ -1,0 +1,34 @@
+.profile {
+  background: #eee;
+  border-radius: 4px;
+  padding: 10px;
+  padding-right: 70px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+
+  img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+  }
+
+  .info {
+    margin-right: auto;
+  }
+
+  .skills {
+    color: #ad2754;
+
+    p {
+      &::before {
+        content: '\f00c';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: bold;
+        font-size: 11px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

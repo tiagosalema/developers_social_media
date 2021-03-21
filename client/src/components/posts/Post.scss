@@ -1,0 +1,37 @@
+.post {
+  border: 1px solid black;
+  padding: 15px;
+  background: #ad275407;
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    i {
+      cursor: pointer;
+    }
+  }
+  .left {
+    display: flex;
+    align-items: center;
+  }
+  .btn {
+    margin: 0;
+  }
+  .comments {
+    margin-top: 15px;
+
+    &__count {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .likes {
+    margin-left: 20px;
+    &__count {
+      font-size: 12px;
+      margin-left: 10px;
+    }
+  }
+}

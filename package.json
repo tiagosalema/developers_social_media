@@ -1,0 +1,14 @@
+{
+  "name": "mern-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\" "
+  },
+  "author": "Tiago Ferreira <tiagof.salema@gmail.com> (https://github.com/tiagosalema)",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
