@@ -5,11 +5,8 @@ This is a MERN + Redux project. It was developed using as reference the [MERN St
 It is a social network with the goal of connecting developers across the world by enabling them to:
 
 - create their own profile
-
 - visit other developer profiles
-
 - add posts
-
 - comment and like other developer posts
 
 Some endpoints are private. That means that an authentication is required. JWT was used to accomplish this.
