@@ -12,7 +12,7 @@ const Posts = ({ getPosts, posts }) => {
     <div className='container'>
       <CreatePost />
       {posts?.map(post => (
-        <Post post={post} key={post._id} />
+        <Post post={post} key={post._id} commentsCTA={true} />
       ))}
     </div>
   );

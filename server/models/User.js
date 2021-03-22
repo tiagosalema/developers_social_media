@@ -7,9 +7,11 @@ const userSchema = new Schema({
   avatar: String,
   date: { type: Date, default: Date.now() },
   posts: [{ type: Schema.Types.ObjectId, ref: 'post' }],
-  likes: [
+  likes: [{ post: { type: Schema.Types.ObjectId, ref: 'post' } }],
+  comments: [
     {
-      post: { type: Schema.Types.ObjectId, ref: 'post' },
+      type: Schema.Types.ObjectId,
+      ref: 'comment',
     },
   ],
 });

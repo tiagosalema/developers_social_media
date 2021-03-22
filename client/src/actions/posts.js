@@ -1,5 +1,14 @@
 import axios from 'axios';
-import { CREATE_POST, DELETE_POST, GET_POSTS, POST_ERROR, UPDATE_LIKES } from './types';
+import {
+  CREATE_POST,
+  DELETE_POST,
+  GET_POSTS,
+  GET_POST,
+  POST_ERROR,
+  UPDATE_LIKES,
+  CREATE_COMMENT,
+  COMMENT_FAIL,
+} from './types';
 
 export const getPosts = () => async dispatch => {
   try {
@@ -18,9 +27,9 @@ export const getPosts = () => async dispatch => {
 
 export const getPost = postId => async dispatch => {
   try {
-    const res = await axios.get('/api/posts/');
+    const res = await axios.get(`/api/posts/${postId}`);
     dispatch({
-      type: GET_POSTS,
+      type: GET_POST,
       payload: res.data,
     });
   } catch (error) {
@@ -72,6 +81,22 @@ export const updateLikes = (postId, userId, isLikedByUser) => async dispatch => 
     dispatch({
       type: UPDATE_LIKES,
       payload: { postId, userId },
+    });
+    console.error(error.message);
+  }
+};
+
+export const addComment = (postId, text) => async dispatch => {
+  try {
+    dispatch({
+      type: CREATE_COMMENT,
+      payload: text,
+    });
+    await axios.post(`/api/posts/comments/${postId}`, { text });
+    console.log('The comment was created');
+  } catch (error) {
+    dispatch({
+      type: COMMENT_FAIL,
     });
     console.error(error.message);
   }

@@ -1,6 +1,7 @@
 const express = require('express');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
+const Comment = require('../../models/Comment');
 const router = express.Router();
 
 const { check, validationResult } = require('express-validator');
@@ -14,6 +15,19 @@ router.get('/', async (req, res) => {
   try {
     const posts = await Post.find().populate('user', ['name', 'avatar']);
     return res.json(posts);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'The server has crashed' });
+  }
+});
+
+// @route   GET api/posts/:postId
+// @desc    Get post by id
+// @access  Public
+router.get('/:postId', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId).populate('user', ['name', 'avatar']);
+    return res.json(post);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: 'The server has crashed' });
@@ -108,5 +122,46 @@ router.post('/likes/:postId', auth, async (req, res) => {
       .json({ msg: 'The server has crashed. Check the console for logged errors.' });
   }
 });
+
+// @route     POST api/posts/comments/:postId
+// @desc      Add comment to post
+// @access    Private
+// @returns   { created_post }
+router.post(
+  '/comments/:postId',
+  auth,
+  check('text', 'Please, write something in your comment').not().isEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+    const { postId } = req.params;
+    const { text } = req.body;
+    const { id: userId } = req.user;
+    try {
+      const user = await User.findById(userId).select(['-password']);
+      const post = await Post.findById(postId);
+
+      const newComment = new Comment({ text, user: userId, post: postId });
+      const commentAdded = await newComment.save();
+      post.comments.push(newComment);
+      user.comments.push(newComment);
+      await post.save();
+      await user.save();
+
+      // await Post.populate(post, ['user']);
+      // await post.save();
+
+      // user.posts.push(post);
+      // user.save();
+      return res.json(commentAdded);
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(500)
+        .json({ msg: 'The server has crashed. Check the console for logged errors.' });
+    }
+  },
+);
 
 module.exports = router;

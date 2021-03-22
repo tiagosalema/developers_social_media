@@ -16,6 +16,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profiles/Profile';
 import Posts from './components/posts/Posts';
+import Comments from './components/comments/Comments';
 import PrivateRoute from './components/auth/PrivateRoute';
 import EditProfile from './components/dashboard/EditProfile';
 import AddExperience from './components/dashboard/AddExperience';
@@ -34,6 +35,7 @@ const App = () => {
           <Route exact path='/profiles' component={Profiles} />
           <Route exact path='/profiles/:id' component={Profile} />
           <Route path='/posts' component={Posts} />
+          <Route path='/comments/:postId' component={Comments} />
           <PrivateRoute path='/dashboard' component={Dashboard} />
           <PrivateRoute path='/edit-profile' component={EditProfile} />
           <PrivateRoute path='/add-experience' component={AddExperience} />

@@ -27,6 +27,7 @@ export const POST_ERROR = 'POST_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const COMMENT_FAIL = 'COMMENT_FAIL';
 
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';

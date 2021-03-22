@@ -5,6 +5,8 @@ import {
   CREATE_POST,
   DELETE_POST,
   UPDATE_LIKES,
+  CREATE_COMMENT,
+  COMMENT_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -24,7 +26,7 @@ export default function postsReducer(state = initialState, action) {
     case GET_POST:
       return {
         ...state,
-        post: payload,
+        current: payload,
       };
     case CREATE_POST:
       return {
@@ -37,9 +39,7 @@ export default function postsReducer(state = initialState, action) {
         all: state.all.filter(post => post._id !== payload),
       };
     case POST_ERROR:
-      return {
-        ...initialState,
-      };
+      return initialState;
     case UPDATE_LIKES:
       const { postId, userId, isLikedByUser } = payload;
       return {
@@ -61,6 +61,16 @@ export default function postsReducer(state = initialState, action) {
           }
         }),
       };
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          comments: [...state.current.comments, payload],
+        },
+      };
+    case COMMENT_FAIL:
+      return state;
     default:
       return state;
   }
