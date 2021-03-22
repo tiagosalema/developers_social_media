@@ -8,13 +8,14 @@ import { deletePost, updateLikes } from '../../actions/posts';
 const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
   const [isLikedByUser, setIsLikedByUser] = useState(-1);
   useEffect(() => {
-    for (let [i, { user }] of post?.likes.entries()) {
+    post.likes = post.likes || []; // TODO - check why post only has comments
+    for (let [i, { user }] of post?.likes?.entries()) {
       if (user === userId) {
         setIsLikedByUser(i);
         break;
       }
     }
-    // eslint-disable-next-line
+    // eslint - disable - next - line;
   }, []);
 
   const history = useHistory();
@@ -26,6 +27,7 @@ const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
 
   const likeIcon = 'far fa-thumbs-up' + (isLikedByUser > -1 ? ' liked' : '');
 
+  if (!post.user) return null;
   return (
     <div className='post'>
       <header>

@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Post from '../posts/Post';
-import { getPost, addComment } from '../../actions/posts';
+import { getPost, addComment, getPostComments } from '../../actions/posts';
 
-const Comments = ({ match, post, userId, getPost, addComment }) => {
+const Comments = ({ match, post, userId, getPost, addComment, getPostComments }) => {
   const { postId } = match.params;
   const [comment, setComment] = useState('');
   useEffect(() => {
     getPost(postId);
-  }, [getPost, postId]);
+  }, []);
+  useEffect(() => getPostComments(postId), [getPostComments, postId]);
 
   if (!post) return null;
 
@@ -37,7 +38,12 @@ const Comments = ({ match, post, userId, getPost, addComment }) => {
           />
           <button className='btn'>Submit</button>
         </form>
-        <h2>Comments:</h2>
+        <h2>Comments</h2>
+        {post.comments.map(comment => (
+          <div key={comment._id} className='comment'>
+            {comment.text}
+          </div>
+        ))}
       </section>
     </div>
   );
@@ -45,7 +51,7 @@ const Comments = ({ match, post, userId, getPost, addComment }) => {
 
 const mapStateToProps = state => ({
   post: state.posts.current,
-  userId: state.auth.user?._id,
+  userId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps, { getPost, addComment })(Comments);
+export default connect(mapStateToProps, { getPost, addComment, getPostComments })(Comments);

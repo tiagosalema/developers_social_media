@@ -8,6 +8,7 @@ import {
   UPDATE_LIKES,
   CREATE_COMMENT,
   COMMENT_FAIL,
+  GET_POST_COMMENTS,
 } from './types';
 
 export const getPosts = () => async dispatch => {
@@ -92,12 +93,23 @@ export const addComment = (postId, text) => async dispatch => {
       type: CREATE_COMMENT,
       payload: text,
     });
-    await axios.post(`/api/posts/comments/${postId}`, { text });
-    console.log('The comment was created');
+    await axios.post('/api/comments', { text, postId });
   } catch (error) {
     dispatch({
       type: COMMENT_FAIL,
     });
+    console.error(error.message);
+  }
+};
+
+export const getPostComments = postId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/comments?postId=${postId}`);
+    dispatch({
+      type: GET_POST_COMMENTS,
+      payload: res.data,
+    });
+  } catch (error) {
     console.error(error.message);
   }
 };

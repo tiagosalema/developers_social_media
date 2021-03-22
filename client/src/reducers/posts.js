@@ -7,6 +7,7 @@ import {
   UPDATE_LIKES,
   CREATE_COMMENT,
   COMMENT_FAIL,
+  GET_POST_COMMENTS,
 } from '../actions/types';
 
 const initialState = {
@@ -24,9 +25,10 @@ export default function postsReducer(state = initialState, action) {
         all: payload,
       };
     case GET_POST:
+      const { likes, comments } = state.current;
       return {
         ...state,
-        current: payload,
+        current: { ...payload, likes, comments },
       };
     case CREATE_POST:
       return {
@@ -71,6 +73,14 @@ export default function postsReducer(state = initialState, action) {
       };
     case COMMENT_FAIL:
       return state;
+    case GET_POST_COMMENTS:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          comments: payload,
+        },
+      };
     default:
       return state;
   }
