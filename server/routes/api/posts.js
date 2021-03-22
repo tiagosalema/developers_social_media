@@ -76,4 +76,37 @@ router.delete('/:postId', auth, async (req, res) => {
   }
 });
 
+// @route     POST api/posts/likes/:id
+// @desc      Update a post
+// @access    Private
+// @returns   { updated_post }
+router.post('/likes/:postId', auth, async (req, res) => {
+  const { postId } = req.params;
+  const { id: userId } = req.user;
+  const { isLikedByUser } = req.body;
+  try {
+    const post = await Post.findById(postId);
+    const user = await User.findById(userId).select(['-password']);
+    if (isLikedByUser > -1) {
+      // remove like
+      const postPosition = user.likes.indexOf(postId);
+      post.likes.splice(isLikedByUser, 1);
+      user.likes.splice(postPosition, 1);
+    } else {
+      // add like
+      post.likes.push({ user: userId });
+      user.likes.push({ post: postId });
+    }
+    post.save();
+    user.save();
+
+    return res.json(post);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: 'The server has crashed. Check the console for logged errors.' });
+  }
+});
+
 module.exports = router;

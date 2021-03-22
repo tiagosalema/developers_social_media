@@ -29,6 +29,10 @@
   }
   .likes {
     margin-left: 20px;
+
+    .liked {
+      font-weight: bold;
+    }
     &__count {
       font-size: 12px;
       margin-left: 10px;

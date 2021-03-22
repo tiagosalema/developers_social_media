@@ -166,7 +166,7 @@ router.get('/:user_id', async (req, res) => {
     }
   } catch (error) {
     console.error(error.message);
-    if (error.kind == 'ObjectId') res.status(400).json({ message: 'Profile not found' });
+    if (error.kind === 'ObjectId') res.status(400).json({ message: 'Profile not found' });
     else res.status(500).json({ msg: 'The server has crashed' });
   }
 });

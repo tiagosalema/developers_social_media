@@ -14,9 +14,7 @@ It is a social network with the goal of connecting developers across the world b
 
 Some endpoints are private. That means that an authentication is required. JWT was used to accomplish this.
 
-You can find the course Certificate of Completion [here](https://www.udemy.com/certificate/UC-312a603a-a0df-42a8-a9c0-b10d6680f155/).
-
-To run the project:
+## To run the project
 
 - run `npm i` in the following 3 directories:
 

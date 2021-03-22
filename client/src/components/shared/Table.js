@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Data = ({ label, data, deleteItem }) => {
-  if (data.length == 0) return null;
+  if (data.length === 0) return null;
   return (
     <>
       <h3>{label}</h3>
