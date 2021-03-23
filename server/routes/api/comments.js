@@ -84,6 +84,35 @@ router.post(
   },
 );
 
+// @route     DELETE api/comments/:commentId
+// @desc      Delete comment
+// @access    Private
+// @returns   { success: 'true' }
+router.delete('/:commentId', auth, async (req, res) => {
+  const { id: userId } = req.user;
+  const { commentId } = req.params;
+
+  try {
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+      res.status(404).json({ error: 'No such comment with that id.' });
+    }
+    let deletedComment;
+    if (comment.user.toString() === userId) {
+      deletedComment = await Comment.findOneAndDelete({ _id: commentId });
+    } else {
+      res.status(403).json({ error: "You sneaky... This comment isn't yours to delete." });
+      return;
+    }
+    return res.json({ message: 'Comment deleted.', deletedComment });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ msg: 'The server has crashed. Check the console for logged errors.' });
+  }
+});
+
 module.exports = router;
 
 /**

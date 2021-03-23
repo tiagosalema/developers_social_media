@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Post from '../posts/Post';
-import { getPost, addComment, getPostComments } from '../../actions/posts';
+import { getPost, addComment, getComments, deleteComment } from '../../actions/posts';
 
 import './Comments.scss';
 
-const Comments = ({ match, post, userId, getPost, addComment, getPostComments }) => {
+const Comments = ({ match, post, userId, getPost, addComment, getComments, deleteComment }) => {
   const { postId } = match.params;
 
   const [comment, setComment] = useState('');
@@ -15,12 +15,11 @@ const Comments = ({ match, post, userId, getPost, addComment, getPostComments })
     getPost(postId);
   }, [getPost, postId]);
 
-  useEffect(() => getPostComments(postId), [getPostComments, postId]);
+  useEffect(() => getComments(postId), [getComments, postId]);
 
   useEffect(() => {
     const closeOptionDropdowns = () => {
       document.querySelectorAll('.comment__dropdown').forEach(drop => (drop.hidden = true));
-      console.log(document.querySelectorAll('.comment__dropdown'));
     };
     document.addEventListener('click', closeOptionDropdowns);
     return () => document.removeEventListener('click', closeOptionDropdowns);
@@ -46,6 +45,11 @@ const Comments = ({ match, post, userId, getPost, addComment, getPostComments })
       if (drop !== dropdown) drop.hidden = true;
     });
     dropdown.hidden = !dropdown.hidden;
+  };
+
+  const handleDelete = commentId => {
+    deleteComment(commentId);
+    console.log('comment deleted');
   };
 
   return (
@@ -90,7 +94,10 @@ const Comments = ({ match, post, userId, getPost, addComment, getPostComments })
                         <i className='fas fa-edit'></i>
                         <p>Edit</p>
                       </li>
-                      <li className='comment__option delete'>
+                      <li
+                        onClick={() => handleDelete(comment._id)}
+                        className='comment__option delete'
+                      >
                         <i className='fas fa-trash-alt'></i>
                         <p>Delete</p>
                       </li>
@@ -108,6 +115,7 @@ const Comments = ({ match, post, userId, getPost, addComment, getPostComments })
               </div>
             </header>
             <p className='comment__text'>{comment.text}</p>
+            <p className='comment__text'>{comment._id}</p>
           </article>
         ))}
       </section>
@@ -120,4 +128,6 @@ const mapStateToProps = state => ({
   userId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps, { getPost, addComment, getPostComments })(Comments);
+export default connect(mapStateToProps, { getPost, addComment, getComments, deleteComment })(
+  Comments,
+);

@@ -9,6 +9,7 @@ import {
   CREATE_COMMENT,
   COMMENT_FAIL,
   GET_POST_COMMENTS,
+  DELETE_COMMENT,
 } from './types';
 
 export const getPosts = () => async dispatch => {
@@ -102,12 +103,24 @@ export const addComment = (postId, text) => async dispatch => {
   }
 };
 
-export const getPostComments = postId => async dispatch => {
+export const getComments = postId => async dispatch => {
   try {
     const res = await axios.get(`/api/comments?postId=${postId}`);
     dispatch({
       type: GET_POST_COMMENTS,
       payload: res.data,
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const deleteComment = commentId => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/comments/${commentId}`);
+    dispatch({
+      type: DELETE_COMMENT,
+      payload: res.data.deletedComment._id,
     });
   } catch (error) {
     console.error(error.message);
