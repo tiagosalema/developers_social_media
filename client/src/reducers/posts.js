@@ -73,7 +73,7 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         current: {
           ...state.current,
-          comments: [...state.current.comments, payload],
+          comments: [payload, ...state.current.comments],
         },
       };
     case COMMENT_FAIL:

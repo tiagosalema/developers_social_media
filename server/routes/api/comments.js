@@ -67,12 +67,13 @@ router.post(
       }
 
       const newComment = new Comment({ text, user: userId, post: postId });
-      const createdComment = await newComment.save();
+      let createdComment = await newComment.save();
       post.comments.push(newComment);
       user.comments.push(newComment);
       await post.save();
       await user.save();
 
+      createdComment = await createdComment.execPopulate({ path: 'user', select: 'name avatar' });
       return res.json(createdComment);
     } catch (error) {
       console.error(error);

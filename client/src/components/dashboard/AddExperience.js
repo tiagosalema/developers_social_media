@@ -10,7 +10,7 @@ const AddExperience = ({ addExperience }) => {
     company: '',
     location: '',
     from: '',
-    to: Date.now(),
+    to: Date.now,
     current: false,
     description: '',
   });

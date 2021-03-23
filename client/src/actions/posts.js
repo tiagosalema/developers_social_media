@@ -89,11 +89,11 @@ export const updateLikes = (postId, userId, isLikedByUser) => async dispatch => 
 
 export const addComment = (postId, text) => async dispatch => {
   try {
+    const res = await axios.post('/api/comments', { text, postId });
     dispatch({
       type: CREATE_COMMENT,
-      payload: text,
+      payload: res.data,
     });
-    await axios.post('/api/comments', { text, postId });
   } catch (error) {
     dispatch({
       type: COMMENT_FAIL,

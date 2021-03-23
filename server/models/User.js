@@ -5,7 +5,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   avatar: String,
-  date: { type: Date, default: Date.now() },
+  date: { type: Date, default: Date.now },
   posts: [{ type: Schema.Types.ObjectId, ref: 'post' }],
   likes: [{ post: { type: Schema.Types.ObjectId, ref: 'post' } }],
   comments: [
