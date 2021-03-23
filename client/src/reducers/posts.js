@@ -11,7 +11,12 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  current: null,
+  current: {
+    text: null,
+    user: {},
+    comments: [],
+    likes: [],
+  },
   all: [],
 };
 

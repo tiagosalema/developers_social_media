@@ -22,7 +22,7 @@ export const getPosts = () => async dispatch => {
     dispatch({
       type: POST_ERROR,
     });
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -37,7 +37,7 @@ export const getPost = postId => async dispatch => {
     dispatch({
       type: POST_ERROR,
     });
-    console.log(error);
+    console.error(error);
   }
 };
 

@@ -23,7 +23,7 @@ const AddExperience = ({ addExperience }) => {
       addExperience(data);
       history.push('/dashboard');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

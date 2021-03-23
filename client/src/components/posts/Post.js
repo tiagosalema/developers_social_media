@@ -15,7 +15,7 @@ const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
         break;
       }
     }
-    // eslint - disable - next - line;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const history = useHistory();

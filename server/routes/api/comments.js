@@ -15,7 +15,6 @@ const router = express.Router();
 // @returns   [{ comment }]
 router.get('/', async (req, res) => {
   const { userId, postId } = req.query;
-  console.log(req.query);
   try {
     let commments;
     if (userId) {
@@ -23,7 +22,7 @@ router.get('/', async (req, res) => {
       comments = await Comment.find({ user: userId }, 'text');
     } else if (postId) {
       // fetching post comments
-      comments = await Comment.find({ post: postId }, 'text');
+      comments = await Comment.find({ post: postId }, 'text date').populate('user', 'name avatar');
     } else {
       res.status(404).json({
         error: 'You need to provide either a userId or a postId in the body of the request.',
@@ -76,7 +75,7 @@ router.post(
 
       return res.json(createdComment);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return res
         .status(500)
         .json({ msg: 'The server has crashed. Check the console for logged errors.' });

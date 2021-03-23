@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     const posts = await Post.find().populate('user', ['name', 'avatar']);
     return res.json(posts);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ msg: 'The server has crashed' });
   }
 });
@@ -29,7 +29,7 @@ router.get('/:postId', async (req, res) => {
     const post = await Post.findById(req.params.postId).populate('user', ['name', 'avatar']);
     return res.json(post);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ msg: 'The server has crashed' });
   }
 });
@@ -59,7 +59,7 @@ router.post(
       user.save();
       return res.json(post);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return res
         .status(500)
         .json({ msg: 'The server has crashed. Check the console for logged errors.' });
@@ -116,7 +116,7 @@ router.post('/likes/:postId', auth, async (req, res) => {
 
     return res.json(post);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res
       .status(500)
       .json({ msg: 'The server has crashed. Check the console for logged errors.' });

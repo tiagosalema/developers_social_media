@@ -40,7 +40,6 @@ export const getProfiles = () => async dispatch => {
 };
 
 export const getProfile = profileId => async dispatch => {
-  console.log({ profileId });
   try {
     const res = await axios.get(`/api/profile/${profileId}`);
     dispatch({
