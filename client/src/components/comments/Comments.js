@@ -49,7 +49,6 @@ const Comments = ({ match, post, userId, getPost, addComment, getComments, delet
 
   const handleDelete = commentId => {
     deleteComment(commentId);
-    console.log('comment deleted');
   };
 
   return (
@@ -59,6 +58,7 @@ const Comments = ({ match, post, userId, getPost, addComment, getComments, delet
         <h2>Leave a comment</h2>
         <form onKeyDownCapture={handlePress} onSubmit={handleSubmit}>
           <textarea
+            required
             name='comment'
             rows='5'
             value={comment}

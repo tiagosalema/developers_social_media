@@ -10,13 +10,38 @@ body {
   padding: 0 15px;
 }
 
+.alerts {
+  position: fixed;
+  z-index: 100;
+  bottom: 5px;
+  right: 5px;
+}
 .alert {
   padding: 10px 40px;
   color: white;
   border: 1px solid white;
+  background: rgb(30, 125, 1);
+  border-radius: 5px;
+  position: relative;
+  margin-top: 5px;
+
+  & {
+    transition: all 0.5s;
+    opacity: 0;
+    transform: translateX(100%);
+  }
 
   &-danger {
     background: #b31313;
+  }
+
+  &.mount {
+    transform: none;
+    opacity: 1;
+  }
+  &.unmount {
+    transform: translateY(110%);
+    opacity: 0;
   }
 }
 

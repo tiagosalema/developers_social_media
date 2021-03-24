@@ -88,7 +88,6 @@ export default function postsReducer(state = initialState, action) {
         },
       };
     case DELETE_COMMENT:
-      console.log({ payload });
       return {
         ...state,
         current: {

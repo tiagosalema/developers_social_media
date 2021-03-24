@@ -1,4 +1,5 @@
 import axios from 'axios';
+import setAlert from './alert';
 import {
   CREATE_POST,
   DELETE_POST,
@@ -50,6 +51,7 @@ export const createPost = text => async dispatch => {
       type: CREATE_POST,
       payload: res.data,
     });
+    dispatch(setAlert('Post created.'));
   } catch (error) {
     console.error(error);
     dispatch({
@@ -65,6 +67,7 @@ export const deletePost = postId => async dispatch => {
       type: DELETE_POST,
       payload: postId,
     });
+    dispatch(setAlert('Post deleted.'));
   } catch (error) {
     dispatch({
       type: POST_ERROR,
@@ -95,6 +98,7 @@ export const addComment = (postId, text) => async dispatch => {
       type: CREATE_COMMENT,
       payload: res.data,
     });
+    dispatch(setAlert('Comment submitted.'));
   } catch (error) {
     dispatch({
       type: COMMENT_FAIL,
@@ -122,7 +126,9 @@ export const deleteComment = commentId => async dispatch => {
       type: DELETE_COMMENT,
       payload: res.data.deletedComment._id,
     });
+    dispatch(setAlert('Comment deleted.'));
   } catch (error) {
+    dispatch(setAlert(error.message, 'danger'));
     console.error(error.message);
   }
 };

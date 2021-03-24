@@ -1,6 +1,8 @@
 // alert
 export const ALERT_SET = 'ALERT_SET';
 export const ALERT_REMOVE = 'ALERT_REMOVE';
+export const ALERT_MOVE_IN = 'ALERT_MOVE_IN';
+export const ALERT_MOVE_OUT = 'ALERT_MOVE_OUT';
 
 // auth
 export const AUTH_LOG_IN = 'AUTH_LOG_IN';

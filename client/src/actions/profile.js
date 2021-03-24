@@ -10,6 +10,7 @@ import {
   AUTH_LOG_OUT,
 } from './types';
 import axios from 'axios';
+import setAlert from './alert';
 
 export const getCurrentProfile = () => async dispatch => {
   try {
@@ -60,6 +61,7 @@ export const editProfile = profile => async dispatch => {
       type: UPDATE_PROFILE,
       payload: res.data,
     });
+    dispatch(setAlert('Profile edited.'));
   } catch (error) {
     console.error(error);
   }
@@ -72,6 +74,7 @@ export const addExperience = experience => async dispatch => {
       type: PROFILE_ADD_EXPERIENCE,
       payload: { experience, _id: res.data._id },
     });
+    dispatch(setAlert('Experience added.'));
   } catch (error) {
     dispatch({
       type: PROFILE_ADD_EXPERIENCE_FAIL,
@@ -86,6 +89,7 @@ export const deleteExperience = id => async dispatch => {
       type: PROFILE_DELETE_EXPERIENCE,
       payload: id,
     });
+    dispatch(setAlert('Experience deleted.'));
   } catch (error) {
     console.error(error);
   }
@@ -101,6 +105,7 @@ export const deleteAccount = () => async dispatch => {
     dispatch({
       type: AUTH_LOG_OUT,
     });
+    dispatch(setAlert('Account deleted.'));
   } catch (error) {
     console.error(error);
   }
