@@ -39,7 +39,7 @@ const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
         <div className='left'>
           {commentsCTA && (
             <div className='comments'>
-              <button className='btn' onClick={() => history.push(`/comments/${post._id}`)}>
+              <button className='btn' onClick={() => history.push(`/post/${post._id}`)}>
                 Comment
               </button>
               <aside className='comments__count'>

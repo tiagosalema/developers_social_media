@@ -24,14 +24,18 @@
       margin-left: 10px;
     }
   }
+  &__date {
+    margin: 0;
+    margin-right: 30px;
+  }
   &__text {
     margin: 0;
-    margin-top: 30px;
+    margin-top: 15px;
   }
   &__options {
     position: absolute;
     right: 15px;
-    top: 10px;
+    top: 20px;
     cursor: pointer;
   }
   &__dropdown {

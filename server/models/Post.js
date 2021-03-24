@@ -5,13 +5,6 @@ const postSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'user' },
   comments: [
     {
-      text: { type: String, required: true },
-      user: { type: Schema.Types.ObjectId, ref: 'user' },
-      date: { type: Date, default: Date.now },
-    },
-  ],
-  comments: [
-    {
       type: Schema.Types.ObjectId,
       ref: 'comment',
     },
