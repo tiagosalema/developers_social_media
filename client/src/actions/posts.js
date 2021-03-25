@@ -10,6 +10,7 @@ import {
   CREATE_COMMENT,
   COMMENT_FAIL,
   GET_POST_COMMENTS,
+  EDIT_COMMENT,
   DELETE_COMMENT,
 } from './types';
 
@@ -119,6 +120,19 @@ export const getComments = postId => async dispatch => {
   }
 };
 
+export const editComment = (commentId, text) => async dispatch => {
+  try {
+    const res = await axios.post(`/api/comments/${commentId}`, { text });
+    dispatch({
+      type: EDIT_COMMENT,
+      payload: res.data.editedComment,
+    });
+    dispatch(setAlert('Comment edited.'));
+  } catch (error) {
+    dispatch(setAlert(error.message, 'danger'));
+    console.error(error.message);
+  }
+};
 export const deleteComment = commentId => async dispatch => {
   try {
     const res = await axios.delete(`/api/comments/${commentId}`);

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\" "
+    "dev": "concurrently \"cd server && npm run server\" \"cd client && npm start\" "
   },
   "author": "Tiago Ferreira <tiagof.salema@gmail.com> (https://github.com/tiagosalema)",
   "license": "ISC",

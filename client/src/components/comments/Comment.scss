@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 15px;
   }
   &__author {
     display: flex;
@@ -30,7 +31,12 @@
   }
   &__text {
     margin: 0;
-    margin-top: 15px;
+    padding: 3.5px 0;
+    padding-left: 1px;
+    padding-top: 3px;
+    &:not(.show) {
+      display: none;
+    }
   }
   &__options {
     position: absolute;
@@ -66,6 +72,20 @@
     p {
       margin: 0;
       margin-left: 10px;
+    }
+  }
+  &__edit {
+    &:not(.show) {
+      display: none;
+    }
+
+    input {
+      font-size: 16px;
+      margin-left: -3px;
+      font-family: 'Work Sans';
+    }
+    .btn {
+      margin-bottom: 0;
     }
   }
 }

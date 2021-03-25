@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server"
+    "server": "nodemon server"
   },
   "author": "Tiago Ferreira <tiagof.salema@gmail.com> (https://github.com/tiagosalema)",
   "license": "MIT",

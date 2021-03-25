@@ -84,6 +84,46 @@ router.post(
   },
 );
 
+// @route     POST api/comments/:commentId
+// @desc      Edit comment
+// @access    Private
+// @body      { text: string }
+// @returns   { edited_comment }
+router.post(
+  '/:commentId',
+  auth,
+  check('text', 'Please, write something in your comment').not().isEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+    const { text } = req.body;
+    const { id: userId } = req.user;
+    const { commentId } = req.params;
+
+    try {
+      const comment = await Comment.findById(commentId);
+      if (!comment) {
+        res.status(404).json({ error: 'No such comment with that id.' });
+      }
+      if (comment.user.toString() !== userId) {
+        res.status(403).json({ error: "You sneaky... This comment isn't yours to edit." });
+        return;
+      }
+
+      comment.text = text;
+      const editedComment = await comment.save();
+
+      return res.json({ message: 'Comment edited.', editedComment });
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ msg: 'The server has crashed. Check the console for logged errors.' });
+    }
+  },
+);
+
 // @route     DELETE api/comments/:commentId
 // @desc      Delete comment
 // @access    Private

@@ -63,6 +63,16 @@ body {
   margin-bottom: 10px;
   font-size: 16px;
 
+  &-sm {
+    padding: 4px 9px;
+    font-weight: normal;
+    border-radius: 0;
+    box-shadow: none;
+    margin-left: 10px;
+    font-size: 14px;
+    top: -1px;
+  }
+
   &:hover {
     background: #1a6592;
     box-shadow: 0 0 4px 2px #0005;

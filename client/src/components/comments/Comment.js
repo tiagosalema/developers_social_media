@@ -1,10 +1,13 @@
+import { useState } from 'react';
+
 import { connect } from 'react-redux';
 
-import { deleteComment } from '../../actions/posts';
+import { editComment, deleteComment } from '../../actions/posts';
 
 import './Comment.scss';
 
-const Comment = ({ comment, userId, deleteComment }) => {
+const Comment = ({ comment, userId, editComment, deleteComment }) => {
+  const [text, setText] = useState(comment.text);
   const handleOptionsDropdown = e => {
     e.stopPropagation();
     const dropdown = e.target.nextElementSibling;
@@ -13,9 +16,17 @@ const Comment = ({ comment, userId, deleteComment }) => {
     });
     dropdown.hidden = !dropdown.hidden;
   };
-
-  const handleDelete = commentId => {
-    deleteComment(commentId);
+  const handleEdit = e => {
+    let header = e.target;
+    while (header.tagName !== 'HEADER') {
+      header = header.parentElement;
+    }
+    header.nextSibling.classList.toggle('show');
+    header.nextSibling.nextSibling.classList.toggle('show');
+  };
+  const handleEditSubmit = commentId => {
+    editComment(commentId, text);
+    // editComment(comment._id, text)
   };
 
   return (
@@ -37,11 +48,11 @@ const Comment = ({ comment, userId, deleteComment }) => {
           <ul hidden className='comment__dropdown'>
             {userId === comment.user._id && (
               <>
-                <li className='comment__option delete'>
+                <li onClick={handleEdit} className='comment__option delete'>
                   <i className='fas fa-edit'></i>
                   <p>Edit</p>
                 </li>
-                <li onClick={() => handleDelete(comment._id)} className='comment__option delete'>
+                <li onClick={() => deleteComment(comment._id)} className='comment__option delete'>
                   <i className='fas fa-trash-alt'></i>
                   <p>Delete</p>
                 </li>
@@ -58,7 +69,12 @@ const Comment = ({ comment, userId, deleteComment }) => {
           </ul>
         </div>
       </header>
+      <form className='comment__edit show' onSubmit={() => handleEditSubmit(comment._id)}>
+        <input type='text' value={text} onChange={e => setText(e.target.value)} />
+        <button className='btn btn-sm'>Submit</button>
+      </form>
       <p className='comment__text'>{comment.text}</p>
+      {/* <p className='comment__text'>{comment._id}</p> */}
     </article>
   );
 };
@@ -67,4 +83,4 @@ const mapStateToProps = state => ({
   userId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps, { deleteComment })(Comment);
+export default connect(mapStateToProps, { editComment, deleteComment })(Comment);

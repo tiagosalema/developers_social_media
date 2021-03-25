@@ -9,6 +9,7 @@ import {
   COMMENT_FAIL,
   GET_POST_COMMENTS,
   DELETE_COMMENT,
+  EDIT_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -83,6 +84,20 @@ export default function postsReducer(state = initialState, action) {
         current: {
           ...state.current,
           comments: payload,
+        },
+      };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          comments: state.current.comments.map(comment => {
+            if (comment._id === payload._id) {
+              return { ...comment, text: payload.text };
+            } else {
+              return comment;
+            }
+          }),
         },
       };
     case DELETE_COMMENT:
