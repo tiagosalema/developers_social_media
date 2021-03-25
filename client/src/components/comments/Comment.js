@@ -69,11 +69,20 @@ const Comment = ({ comment, userId, editComment, deleteComment }) => {
           </ul>
         </div>
       </header>
-      <form className='comment__edit show' onSubmit={() => handleEditSubmit(comment._id)}>
+      <div className='comment__edit'>
         <input type='text' value={text} onChange={e => setText(e.target.value)} />
-        <button className='btn btn-sm'>Submit</button>
-      </form>
-      <p className='comment__text'>{comment.text}</p>
+        <button
+          className='btn btn-sm'
+          onClick={e => {
+            e.target.parentElement.classList.toggle('show');
+            e.target.parentElement.nextSibling.classList.toggle('show');
+            handleEditSubmit(comment._id);
+          }}
+        >
+          Submit
+        </button>
+      </div>
+      <p className='comment__text show'>{comment.text}</p>
       {/* <p className='comment__text'>{comment._id}</p> */}
     </article>
   );
