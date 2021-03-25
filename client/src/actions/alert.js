@@ -8,12 +8,12 @@ const setAlert = (msg, alertType, timeout = 3500) => dispatch => {
     type: ALERT_SET,
     payload: { msg, alertType, timeout, id },
   });
-  process.nextTick(() => {
+  setTimeout(() => {
     dispatch({
       type: ALERT_MOVE_IN,
       payload: id,
     });
-  });
+  }, 1);
 
   setTimeout(() => {
     dispatch({

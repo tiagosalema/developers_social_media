@@ -97,13 +97,11 @@ router.delete('/:commentId', auth, async (req, res) => {
     if (!comment) {
       res.status(404).json({ error: 'No such comment with that id.' });
     }
-    let deletedComment;
-    if (comment.user.toString() === userId) {
-      deletedComment = await Comment.findOneAndDelete({ _id: commentId });
-    } else {
+    if (comment.user.toString() !== userId) {
       res.status(403).json({ error: "You sneaky... This comment isn't yours to delete." });
       return;
     }
+    const deletedComment = await Comment.findOneAndDelete({ _id: commentId });
     return res.json({ message: 'Comment deleted.', deletedComment });
   } catch (error) {
     console.error(error);

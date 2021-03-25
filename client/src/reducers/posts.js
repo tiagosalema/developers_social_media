@@ -43,11 +43,9 @@ export default function postsReducer(state = initialState, action) {
       };
     case DELETE_POST:
       return {
-        ...state,
+        current: { ...state.current, text: null, user: {}, _id: null },
         all: state.all.filter(post => post._id !== payload),
       };
-    case POST_ERROR:
-      return initialState;
     case UPDATE_LIKES:
       const { postId, userId, isLikedByUser } = payload;
       return {
@@ -95,6 +93,7 @@ export default function postsReducer(state = initialState, action) {
           comments: state.current.comments.filter(comment => comment._id !== payload),
         },
       };
+    case POST_ERROR:
     default:
       return state;
   }

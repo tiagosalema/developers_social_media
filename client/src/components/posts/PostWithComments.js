@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Post from './Post';
 import Comment from '../comments/Comment';
-import { getPost, addComment, getComments, deleteComment } from '../../actions/posts';
+import { getPost, addComment, getComments } from '../../actions/posts';
 
 const PostWithComments = ({ match, post, getPost, addComment, getComments }) => {
   const { postId } = match.params;
@@ -69,6 +69,4 @@ const PostWithComments = ({ match, post, getPost, addComment, getComments }) => 
 
 const mapStateToProps = state => ({ post: state.posts.current });
 
-export default connect(mapStateToProps, { getPost, addComment, getComments, deleteComment })(
-  PostWithComments,
-);
+export default connect(mapStateToProps, { getPost, addComment, getComments })(PostWithComments);

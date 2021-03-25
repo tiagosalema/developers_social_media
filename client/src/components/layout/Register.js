@@ -35,7 +35,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <div id='register'>
+    <div id='register' className='container'>
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
         <input name='name' value={name} onChange={onChange} type='text' placeholder='Name' />

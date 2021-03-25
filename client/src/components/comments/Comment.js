@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+import { deleteComment } from '../../actions/posts';
+
 import './Comment.scss';
 
 const Comment = ({ comment, userId, deleteComment }) => {
@@ -65,4 +67,4 @@ const mapStateToProps = state => ({
   userId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps)(Comment);
+export default connect(mapStateToProps, { deleteComment })(Comment);

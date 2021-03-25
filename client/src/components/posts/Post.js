@@ -26,8 +26,8 @@ const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
   };
 
   const likeIcon = 'far fa-thumbs-up' + (isLikedByUser > -1 ? ' liked' : '');
-
   if (!post.user) return null;
+  if (Object.keys(post.user).length === 0) return null;
   return (
     <div className='post'>
       <header>
@@ -55,9 +55,11 @@ const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
             </span>
           </div>
         </div>
-        <button onClick={() => deletePost(post._id)} className='btn btn-red'>
-          Delete
-        </button>
+        {userId === post.user._id && (
+          <button onClick={() => deletePost(post._id)} className='btn btn-red'>
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

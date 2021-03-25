@@ -27,7 +27,7 @@ const SignIn = ({ isAuthenticated, signIn }) => {
     }
   };
   return (
-    <div id='sign-in'>
+    <div id='sign-in' className='container'>
       <h1>Sign in</h1>
       <form onSubmit={onSumbit}>
         <input

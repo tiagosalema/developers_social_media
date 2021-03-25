@@ -57,7 +57,7 @@ router.post(
 
       user.posts.push(post); // pushes ObjectId
       user.save();
-      return res.json(post);
+      return res.status(201).json(post);
     } catch (error) {
       console.error(error);
       return res
@@ -68,20 +68,26 @@ router.post(
 );
 
 // @route     DELETE api/posts
-// @desc      Delete all posts
+// @desc      Delete a post
 // @access    Private
 // @returns   { deleted_post } | null
 router.delete('/:postId', auth, async (req, res) => {
-  try {
-    const { postId } = req.params;
+  const { postId } = req.params;
+  const { id: userId } = req.user;
 
+  try {
+    const post = await Post.findById(postId);
+    if (post.user.toString() !== userId) {
+      res.status(403).json({ error: "You sneaky... This post isn't yours to delete." });
+      return;
+    }
     // removes the post ObjectId from the user posts array
     const user = await User.findById(req.user.id);
     user.posts = user.posts.filter(post => post.toString() !== postId);
     user.save();
 
-    const post = await Post.findByIdAndDelete(postId);
-    return res.json(post);
+    await Post.findByIdAndDelete(postId);
+    return res.json({ message: 'Post deleted successfully' });
   } catch (error) {
     console.error(error);
     return res
