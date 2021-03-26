@@ -141,7 +141,31 @@ router.delete('/:commentId', auth, async (req, res) => {
       res.status(403).json({ error: "You sneaky... This comment isn't yours to delete." });
       return;
     }
-    const deletedComment = await Comment.findOneAndDelete({ _id: commentId });
+
+    // disconnect comment from both the user who created it and the post where it was made
+    const user = await User.findById(userId);
+    const post = await Post.findById(comment.post.toString());
+
+    user.comments = user.comments.filter(comment => comment.toString() !== commentId);
+    post.comments = post.comments.filter(comment => comment.toString() !== commentId);
+
+    await user.save();
+    await post.save();
+
+    let deletedComment;
+    if (comment.children.length === 0) {
+      deletedComment = await Comment.findOneAndDelete({ _id: commentId });
+    } else {
+      deletedComment = {
+        ...comment,
+        text: '[ delete by user ]',
+        user: null,
+        post: null,
+        date: null,
+      };
+      await comment.save();
+    }
+
     return res.json({ message: 'Comment deleted.', deletedComment });
   } catch (error) {
     console.error(error);
