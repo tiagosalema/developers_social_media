@@ -21,6 +21,8 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+const jwtSecret = process.env.jwtSecret || config.get('jwtSecret');
+
 // @route   POST api/auth
 // @desc    Signin route
 // @access  Public
@@ -44,7 +46,7 @@ router.post(
       if (!isMatch) return res.status(400).send({ errors: [{ msg: 'Credentials incorrect.' }] });
 
       const payload = { user: { id: user.id } };
-      const token = await jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 3600 * 10000 });
+      const token = await jwt.sign(payload, jwtSecret, { expiresIn: 3600 * 10000 });
 
       res.json({ token });
     } catch (err) {

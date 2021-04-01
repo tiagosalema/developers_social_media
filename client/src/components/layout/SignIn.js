@@ -28,7 +28,7 @@ const SignIn = ({ isAuthenticated, signIn }) => {
   };
   return (
     <div id='sign-in' className='container'>
-      <h1>Sign in</h1>
+      <h1>Login</h1>
       <form onSubmit={onSumbit}>
         <input
           name='email'
@@ -44,7 +44,7 @@ const SignIn = ({ isAuthenticated, signIn }) => {
           type='password'
           placeholder='Password'
         />
-        <button action='submit'>Register</button>
+        <button action='submit'>Login</button>
       </form>
       <p>
         Don't have an account? <Link to='/register'>Register</Link>

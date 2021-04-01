@@ -10,6 +10,8 @@ const User = require('../../models/User');
 
 const router = express.Router();
 
+const jwtSecret = process.env.jwtSecret || config.get('jwtSecret');
+
 // @route   POST api/users
 // @desc    Signup route
 // @access  Public
@@ -41,7 +43,7 @@ router.post(
       await user.save();
 
       const payload = { user: { id: user.id } };
-      const token = await jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 3600 * 10000 });
+      const token = await jwt.sign(payload, jwtSecret, { expiresIn: 3600 * 10000 });
 
       res.json({ token });
     } catch (err) {
