@@ -1,0 +1,85 @@
+{
+  "info": {
+    "_postman_id": "183807ce-7e57-4c40-8df2-08ebeefdbdd7",
+    "name": "Users & Auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Tiago\",\n    \"email\": \"tiago@gmail.com\",\n    \"password\": \"pass123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:5000/api/users",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "users"]
+        },
+        "description": "For now, a token is returned"
+      },
+      "response": []
+    },
+    {
+      "name": "Sign in",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"tiagof.salema@gmail.com\",\n    \"password\": \"121212\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:5000/api/auth",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/users",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "users"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get logged in user data by token",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/auth",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth"]
+        },
+        "description": "Checks if token is valid and returns data of logged in user"
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "info": {
+    "_postman_id": "035adbcf-6bda-4ded-beba-7a2417cd79ac",
+    "name": "Comments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Post comment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"postId\": \"6057dd323fcf72b84f64e9bd\",\n    \"text\": \"A new way of writing comments!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:5000/api/comments",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "comments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fetch post comments",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"postId\": \"6058ed88e73d91e0cb82c826\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:5000/api/comments",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "comments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete comment",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{localhost}}/comments/6058edc0e73d91e0cb82c82e",
+          "host": ["{{localhost}}"],
+          "path": ["comments", "6058edc0e73d91e0cb82c82e"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

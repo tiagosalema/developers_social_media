@@ -1,0 +1,127 @@
+{
+  "info": {
+    "_postman_id": "fa1cfcd1-a40c-4e87-82b4-75f974a015a9",
+    "name": "Profiles",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create/Update",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"status\": \"developer\",\n    \"skills\": \"javascript,html, css\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:5000/api/profile",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all profiles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/profile",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get logged user profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/profile/me",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile", "me"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get profile using a user id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/profile/60170964f944b4b7751c38c9",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile", "60170964f944b4b7751c38c9"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add an experience",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \n    \"title\": \"My first experience\",\n    \"company\": \"Imaginary company\", \n    \"location\": \"Manchester\", \n    \"from\": \"2021-03-02\", \n    \"current\": \"true\",\n    \"description\": \"It's being fun to work here\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:5000/api/profile/experience",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile", "experience"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete profile, user & posts",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/profile",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile"]
+        },
+        "description": "Private"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete an experience",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "localhost:5000/api/profile/experience/60452aa6bd0f78268f5ee90c",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "profile", "experience", "60452aa6bd0f78268f5ee90c"]
+        },
+        "description": "specify experience id in the url"
+      },
+      "response": []
+    }
+  ]
+}
