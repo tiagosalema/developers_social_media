@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd server && npm run server\" \"cd client && npm start\" "
+    "dev": "concurrently \"cd server && npm run server\" \"cd client && npm start\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Tiago Ferreira <tiagof.salema@gmail.com> (https://github.com/tiagosalema)",
   "license": "ISC",
