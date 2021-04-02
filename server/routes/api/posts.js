@@ -110,12 +110,14 @@ router.post('/likes/:postId', auth, async (req, res) => {
     if (isLikedByUser > -1) {
       // remove like
       const postPosition = user.likes.indexOf(postId);
-      post.likes.splice(isLikedByUser, 1);
+      post.likes.users.splice(isLikedByUser, 1);
       user.likes.splice(postPosition, 1);
-    } else {
+      post.likes.count--;
+    } else if (isLikedByUser === -1) {
       // add like
-      post.likes.push({ user: userId });
+      post.likes.users.push({ user: userId });
       user.likes.push({ post: postId });
+      post.likes.count++;
     }
     post.save();
     user.save();

@@ -8,6 +8,7 @@ import Post from './Post';
 const Posts = ({ getPosts, posts }) => {
   useEffect(getPosts, [getPosts]);
 
+  if (!posts[0]._id) return null;
   return (
     <div className='container'>
       <CreatePost />
@@ -19,7 +20,7 @@ const Posts = ({ getPosts, posts }) => {
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts.all,
+  posts: state.posts,
 });
 
 export default connect(mapStateToProps, { getPosts })(Posts);

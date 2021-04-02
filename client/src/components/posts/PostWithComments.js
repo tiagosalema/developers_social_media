@@ -67,6 +67,6 @@ const PostWithComments = ({ match, post, getPost, addComment, getComments }) => 
   );
 };
 
-const mapStateToProps = state => ({ post: state.posts.current });
+const mapStateToProps = state => ({ post: state.posts[0] });
 
 export default connect(mapStateToProps, { getPost, addComment, getComments })(PostWithComments);

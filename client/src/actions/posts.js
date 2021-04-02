@@ -78,16 +78,12 @@ export const deletePost = postId => async dispatch => {
 
 export const updateLikes = (postId, userId, isLikedByUser) => async dispatch => {
   try {
+    await axios.post(`/api/posts/likes/${postId}`, { isLikedByUser });
     dispatch({
       type: UPDATE_LIKES,
       payload: { postId, userId, isLikedByUser },
     });
-    await axios.post(`/api/posts/likes/${postId}`, { isLikedByUser });
   } catch (error) {
-    dispatch({
-      type: UPDATE_LIKES,
-      payload: { postId, userId },
-    });
     console.error(error.message);
   }
 };

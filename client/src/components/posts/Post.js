@@ -8,21 +8,19 @@ import { deletePost, updateLikes } from '../../actions/posts';
 const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
   const [isLikedByUser, setIsLikedByUser] = useState(-1);
   useEffect(() => {
-    post.likes = post.likes || []; // TODO - check why post only has comments
-    for (let [i, { user }] of post?.likes?.entries()) {
+    for (let [i, { user }] of post?.likes.users.entries()) {
       if (user === userId) {
         setIsLikedByUser(i);
         break;
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [post, userId]);
 
   const history = useHistory();
 
   const handleLike = () => {
     updateLikes(post._id, userId, isLikedByUser);
-    setIsLikedByUser(isLikedByUser === -1 ? post.likes.length : -1);
+    setIsLikedByUser(isLikedByUser === -1 ? post.likes.count : -1);
   };
 
   const likeIcon = 'far fa-thumbs-up' + (isLikedByUser > -1 ? ' liked' : '');
@@ -50,7 +48,7 @@ const Post = ({ commentsCTA, userId, post, deletePost, updateLikes }) => {
           <div className='likes'>
             <i className={likeIcon} onClick={handleLike}></i>
             <span className='likes__count'>
-              {post.likes.length} {post.likes.length === 1 ? 'developer likes' : 'developers like'}{' '}
+              {post.likes.count} {post.likes.count === 1 ? 'developer likes' : 'developers like'}{' '}
               this
             </span>
           </div>

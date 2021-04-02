@@ -147,10 +147,13 @@ router.delete('/:commentId', auth, async (req, res) => {
     const post = await Post.findById(comment.post.toString());
 
     user.comments = user.comments.filter(comment => comment.toString() !== commentId);
-    post.comments = post.comments.filter(comment => comment.toString() !== commentId);
-
     await user.save();
-    await post.save();
+
+    // post may already be deleted
+    if (post) {
+      post.comments = post.comments.filter(comment => comment.toString() !== commentId);
+      await post.save();
+    }
 
     let deletedComment;
     if (comment.children.length === 0) {
