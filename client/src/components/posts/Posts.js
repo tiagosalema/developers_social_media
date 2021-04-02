@@ -8,13 +8,10 @@ import Post from './Post';
 const Posts = ({ getPosts, posts }) => {
   useEffect(getPosts, [getPosts]);
 
-  if (!posts[0]._id) return null;
   return (
     <div className='container'>
       <CreatePost />
-      {posts?.map(post => (
-        <Post post={post} key={post._id} commentsCTA={true} />
-      ))}
+      {posts[0]?._id && posts.map(post => <Post post={post} key={post._id} commentsCTA={true} />)}
     </div>
   );
 };
