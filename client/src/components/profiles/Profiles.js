@@ -11,6 +11,7 @@ const Developers = ({ profiles, getProfiles }) => {
     <div className='container'>
       <p>Connect with other developers...</p>
       {profiles?.map(profile => {
+        if (!profile.user) return null;
         const {
           user: { name, avatar },
           status,
