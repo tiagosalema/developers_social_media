@@ -42,13 +42,11 @@ const Profile = ({ getProfile, match, profile }) => {
             </a>
           )}
           {social &&
-            Object.entries(social).map(([social, site]) => {
-              return (
-                <a href={site} target='_blank' rel='noopener noreferrer'>
-                  <i className={`fab fa-${social}${social !== 'linkedin' ? '-square' : ''}`}></i>
-                </a>
-              );
-            })}
+            Object.entries(social).map(([social, site]) => (
+              <a key={social} href={site} target='_blank' rel='noopener noreferrer'>
+                <i className={`fab fa-${social}${social !== 'linkedin' ? '-square' : ''}`}></i>
+              </a>
+            ))}
         </div>
       </header>
       {bio && (
@@ -61,9 +59,9 @@ const Profile = ({ getProfile, match, profile }) => {
         <div className='skills'>
           <h2>My skillset</h2>
           <ul>
-            {skills.map(skill => {
-              return <li>{skill}</li>;
-            })}
+            {skills.map(skill => (
+              <li key={skill}>{skill}</li>
+            ))}
           </ul>
         </div>
       )}
@@ -72,9 +70,9 @@ const Profile = ({ getProfile, match, profile }) => {
           <h2>Experience</h2>
           <ul>
             {experience.map(exp => {
-              const { title, company, from, to, location, description } = exp;
+              const { title, company, from, to, location, description, _id } = exp;
               return (
-                <li>
+                <li key={_id}>
                   <p className='title'>{title}</p>
                   <p>{company}</p>
                   <p>
