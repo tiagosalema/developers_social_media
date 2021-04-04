@@ -11,10 +11,12 @@ const PostWithComments = ({ match, post, getPost, addComment, getComments }) => 
   const [comment, setComment] = useState('');
 
   useEffect(() => {
-    getPost(postId);
-  }, [getPost, postId]);
-
-  useEffect(() => getComments(postId), [getComments, postId]);
+    async function getPostAndComments(postId) {
+      await getPost(postId);
+      await getComments(postId);
+    }
+    getPostAndComments(postId);
+  }, [getComments, getPost, postId]);
 
   useEffect(() => {
     const closeOptionDropdowns = () => {
@@ -36,7 +38,6 @@ const PostWithComments = ({ match, post, getPost, addComment, getComments }) => 
       handleSubmit(e);
     }
   };
-
   return (
     <div className='container my-5'>
       <Post post={post} key={postId} commentsCTA={false} />
@@ -60,7 +61,7 @@ const PostWithComments = ({ match, post, getPost, addComment, getComments }) => 
         )}
         <h2>Comments</h2>
         {post.comments.map(comment => (
-          <Comment comment={comment} key={comment._id} />
+          <Comment comment={comment} key={comment._id || comment} />
         ))}
       </section>
     </div>

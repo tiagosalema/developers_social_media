@@ -29,6 +29,7 @@ const Comment = ({ comment, userId, editComment, deleteComment }) => {
     // editComment(comment._id, text)
   };
 
+  if (!comment.user) return null;
   return (
     <article className='comment'>
       <header className='comment__header'>
