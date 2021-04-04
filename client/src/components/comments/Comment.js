@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { connect } from 'react-redux';
 
@@ -7,7 +7,10 @@ import { editComment, deleteComment } from '../../actions/posts';
 import './Comment.scss';
 
 const Comment = ({ comment, userId, editComment, deleteComment }) => {
-  const [text, setText] = useState(comment.text);
+  const [text, setText] = useState('');
+
+  useEffect(() => comment.text && setText(comment.text), [comment.text]);
+
   const handleOptionsDropdown = e => {
     e.stopPropagation();
     const dropdown = e.target.nextElementSibling;
@@ -26,7 +29,6 @@ const Comment = ({ comment, userId, editComment, deleteComment }) => {
   };
   const handleEditSubmit = commentId => {
     editComment(commentId, text);
-    // editComment(comment._id, text)
   };
 
   if (!comment.user) return null;
@@ -49,11 +51,11 @@ const Comment = ({ comment, userId, editComment, deleteComment }) => {
           <ul hidden className='comment__dropdown'>
             {userId === comment.user._id && (
               <>
-                <li onClick={handleEdit} className='comment__option delete'>
+                <li onClick={handleEdit} className='comment__option'>
                   <i className='fas fa-edit'></i>
                   <p>Edit</p>
                 </li>
-                <li onClick={() => deleteComment(comment._id)} className='comment__option delete'>
+                <li onClick={() => deleteComment(comment._id)} className='comment__option'>
                   <i className='fas fa-trash-alt'></i>
                   <p>Delete</p>
                 </li>
@@ -84,7 +86,6 @@ const Comment = ({ comment, userId, editComment, deleteComment }) => {
         </button>
       </div>
       <p className='comment__text show'>{comment.text}</p>
-      {/* <p className='comment__text'>{comment._id}</p> */}
     </article>
   );
 };
