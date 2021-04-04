@@ -36,8 +36,10 @@ const SignIn = ({ isAuthenticated, signIn }) => {
           onChange={onChange}
           type='email'
           placeholder='Email Address'
+          autoComplete='username'
         />
         <input
+          autoComplete='current-password'
           name='password'
           value={password}
           onChange={onChange}

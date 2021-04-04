@@ -52,6 +52,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           onChange={onChange}
           type='password'
           placeholder='Password'
+          autoComplete='new-password'
         />
         <input
           name='password2'
