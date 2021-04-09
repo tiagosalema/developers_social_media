@@ -19,7 +19,7 @@ export const Navbar = ({ signOut, isAuthenticated }) => {
       <Link to='/dashboard'>
         <i className='fas fa-columns'></i> Dashboard
       </Link>
-      <Link to='/' onClick={signOut}>
+      <Link to='/log-out' onClick={signOut}>
         <i className='fas fa-sign-out-alt'></i> Log out
       </Link>
     </>

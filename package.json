@@ -6,11 +6,20 @@
   "scripts": {
     "start": "node server",
     "dev": "concurrently \"cd server && npm run server\" \"cd client && npm start\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install --prefix server"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install --prefix server",
+    "test": "jest"
   },
   "author": "Tiago Ferreira <tiagof.salema@gmail.com> (https://github.com/tiagosalema)",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^6.0.0"
+  },
+  "dependencies": {
+    "@types/jest": "^26.0.22",
+    "config": "^3.3.6",
+    "jest": "^26.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "puppeteer": "^8.0.0"
   }
 }
