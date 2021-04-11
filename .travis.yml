@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - '8'
+dist: trusty # from linux
+services:
+  - mongodb
+  - redis-server
+env:
+  - NODE_ENV=ci PORT=3000
+cache:
+  directories:
+    - node_modules
+    - server/node_modules
+    - client/node_modules
+install:
+  - npm install
+  - npm install --prefix server
+  - npm run heroku-postbuild
+script:
+  - nohup npm run start & # nohup: no hang-up: don't kill process if shell is closed; &: run in the background
+  - sleep 3
+  - npm run test

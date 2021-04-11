@@ -19,7 +19,7 @@ app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/comments', require('./routes/api/comments'));
 
 // serve static assets in production
-if (process.env.NODE_ENV === 'production') {
+if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   // serve static folder
   app.use(express.static('client/build'));
 
