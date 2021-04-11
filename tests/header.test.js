@@ -52,8 +52,7 @@ describe('User is logged in', () => {
   });
 
   it('should have a CTA to create a profile', async () => {
-    await page.goto('http://localhost:3000/dashboard', { waitUntil: 'load' });
-    await page.waitForSelector('#dashboard .btn');
+    await page.goto('http://localhost:3000/dashboard', { waitUntil: 'networkidle0' });
     const text = await page.$eval('#dashboard .btn', el => el.innerHTML);
     expect(text).toContain('Create a profile');
   });

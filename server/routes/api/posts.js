@@ -7,6 +7,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 const auth = require('../../middleware/auth');
+const clearCache = require('../../middleware/cleanCache');
 
 // @route   GET api/posts
 // @desc    Get all posts
@@ -42,6 +43,7 @@ router.post(
   '/',
   auth,
   check('text', 'Please, write something in your post').not().isEmpty(),
+  clearCache,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
