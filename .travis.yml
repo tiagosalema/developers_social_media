@@ -17,6 +17,6 @@ install:
   - npm install --prefix server
   - npm run heroku-postbuild
 script:
-  - nohup npm run start & # nohup: no hang-up: don't kill process if shell is closed; &: run in the background
+  - nohup npm run start & # nohup (no hang-up): don't kill process if shell is closed; &: run in the background
   - sleep 3
   - npm run test
